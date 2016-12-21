@@ -1,0 +1,8 @@
+node_modules
+*.inc
+*.pass
+
+dist
+build
+recruit
+lib/ruby-devkit
