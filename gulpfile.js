@@ -96,7 +96,7 @@ gulp.task('copy-dependencies', function() {
             './node_modules/bootstrap/dist/css/*.min.css',
             './lib/data-tables/css/*.css',
             './lib/jquery-mobile-switch/*.min.css',
-            './lib/dropzone-4.3.0/dist/dropzone.css',
+            './lib/dropzone-4.3.0/dist/dropzoneCSS.css',
             './lib/awesome-bootstrap-checkbox-1.0.0-alpha.2/*.css',
             './node_modules/bootstrap-select/dist/css/*.min.css'])
         .pipe(changed(CssDist))
@@ -110,7 +110,7 @@ gulp.task('copy-dependencies', function() {
             './node_modules/progressbar.js/dist/*.js',
             './lib/data-tables/js/*.js',
             './lib/jquery-mobile-switch/*.min.js',
-            './lib/dropzone-4.3.0/dist/dropzone.js',
+            './lib/dropzone-4.3.0/dist/dropzoneJS.js',
             './node_modules/bootstrap-select/dist/js/*.min.js',])
             .pipe(gulp.dest(JSDist))
         .pipe(gulp.src('./node_modules/intl-tel-input/build/js/utils.js'))
@@ -142,7 +142,7 @@ gulp.task('upload', function() {
 
 gulp.task('docs', function() {
     return gulp.src('./dev/Docs/content/*')
-            .pipe(changed('./dev/Docs/content'))
+            .pipe(changed('./build/Docs/content'))
             .pipe(gulp.dest('./build/Docs/content'));
 });
 
@@ -169,7 +169,7 @@ gulp.task('rev', function(){
     var revAll = require('gulp-rev-all');
     var filter = require('gulp-filter');
     var clean = require('gulp-clean');
-    // var revAll = new RevAll({ dontRenameFile: [/^\/favicon.ico$/g, '.php', 'intlTelInput.min.js', 'intlTelInput.js','.htaccess'], dontUpdateReference: [/^\/favicon.ico$/g, '.php', 'intlTelInput.js','intlTelInput.min.js','.htaccess'], dontSearchFile: ['.pdf']});
+    //var revAll = new RevAll({ dontRenameFile: [/^\/favicon.ico$/g, '.php', 'intlTelInput.min.js', 'intlTelInput.js','.htaccess'], dontUpdateReference: [/^\/favicon.ico$/g, '.php', 'intlTelInput.js','intlTelInput.min.js','.htaccess'], dontSearchFile: ['.pdf']});
 
     const f = filter(['**', '!*/src/*'],{restore: true});
 
@@ -178,10 +178,10 @@ gulp.task('rev', function(){
 
     return gulp.src(['./build/**/*'],{ dot: true })
             //.pipe(f)
-            .pipe(revAll.revision())
+            .pipe(revAll.revision({ includeFilesInManifest:['.css', '.js', '.php', '.jpg', '.jpeg', '.png', '.pass', '.json', '.pdf'], dontRenameFile: [/^\/favicon.ico$/g, '.php', 'intlTelInput.min.js', 'intlTelInput.js','.htaccess'], dontUpdateReference: [/^\/favicon.ico$/g, '.php', 'intlTelInput.js','intlTelInput.min.js','.htaccess'], dontSearchFile: ['.pdf']}))
             //.pipe(f.restore)
             .pipe(gulp.dest('./dist'))
-            .pipe(revAll.manifestFile({ dontRenameFile: [/^\/favicon.ico$/g, '.php', 'intlTelInput.min.js', 'intlTelInput.js','.htaccess'], dontUpdateReference: [/^\/favicon.ico$/g, '.php', 'intlTelInput.js','intlTelInput.min.js','.htaccess'], dontSearchFile: ['.pdf']}))
+            .pipe(revAll.manifestFile())
             .pipe(gulp.dest('./dist'))
             .pipe(revAll.versionFile())
             .pipe(gulp.dest('./dist'));
@@ -194,3 +194,4 @@ gulp.task('notify', function(){
 });
 
 gulp.task('default', gulp.series(gulp.parallel('copy-dependencies', 'copy-js-php' ,'css', 'js-unmod', 'html','image','docs'),'rev','notify'));
+gulp.task('production', gulp.series(gulp.parallel('copy-dependencies', 'copy-js-php' ,'css', 'js', 'html','image','docs'),'rev','notify'));

@@ -51,7 +51,7 @@
                                 <div>
                                     <div class="col-md-8">
                                         <div class="cl-div-site-breadcrumb">
-                                            <span class="cl-span-site-breadcrumb-title">About</span>
+                                            <span class="cl-span-site-breadcrumb-title">About - test the change :)</span>
                                         </div>
                                     </div>
                                     <div class="col-md-3 thick-border-light pull-right cl-div-search-box">
