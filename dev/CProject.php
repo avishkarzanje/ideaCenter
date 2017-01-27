@@ -375,5 +375,71 @@
         mysqli_close($sql_conn);
         return json_encode($resp);
     }
+
+    function updateProjectReviewer($id,$reviewer)
+    {
+        if(!isLoggedIn())
+        {
+            $res["message"] = "User not logged in";
+            $res["response"] = false;
+            return json_encode($resp);
+        }
+
+        $sql_conn = mysqli_connection();
+
+        /* check for valid project */
+        $query = "SELECT `project_title` FROM `UD_P_Info` WHERE _id = '".$id ."'";
+        if (!($stmt = $sql_conn->prepare($query))){
+            $res["message"] =  "Prepare failed: (" . $sql_conn->errno . ") " . $sql_conn->error;
+            $res["response"] = false;
+            return json_encode($res);
+        }
+                  
+        if (!($stmt->execute())) {
+            $res["message"] =  "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            $res["response"] = false;
+            return json_encode($res);
+        }
+        
+        if (!($ret = $stmt->get_result())) {
+            $res["message"] =  "Getting Result failed: (" . $stmt->errno . ") " . $stmt->error;
+            $res["response"] = false;
+            return json_encode($res);
+        }
+
+        if ($ret->num_rows <= 0) 
+        {
+            $res["message"] =  "Got ZERO records for given project ID";
+            $res["response"] = true;
+            $res["num_rows"] = $ret->num_rows;
+            return json_encode($res);
+        }
+
+        // update the project title for now.
+        $sql = "UPDATE UD_P_Info SET reviewer='" .$reviewer. "' WHERE _id = '".$id ."'";
+        if ($sql_conn->query($sql) === TRUE)
+        {
+            $res["message"] =  "Record updated successfully";;
+            $res["response"] = true;
+            return json_encode($res);
+        }
+        else 
+        {
+            $res["message"] =  "Failed to update the record" .$sql_conn->error ;
+            $res["response"] = false;
+            return json_encode($res);
+        }
+
+        $res = array();
+        while($row = mysqli_fetch_array($ret)) 
+        {
+           $res[] = $row;
+        }
+
+        $stmt->close();
+        mysqli_close($sql_conn);
+        return json_encode($res);
+    }
+
     
 ?>

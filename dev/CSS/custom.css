@@ -2867,3 +2867,11 @@ div#id-div-submit-project-upper-container {
 .cl-div-h2-solution-item-header:hover, .cl-div-h3-solution-item-header:hover {
     opacity: 0.85;
 }
+
+/* reviewer drop-down box on adminDashboard.js */
+.reviewer-holder{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    margin-bottom: 3px;
+}

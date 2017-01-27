@@ -3,6 +3,14 @@
     include_once("helper.php");
     include_once("CUtil.php");
     
+    // Enum for Type of the user 
+    abstract class TypeOfUser {
+        const ADMIN = 1;
+        const DATABASE_ADMIN = 2;
+        const CLIENT_USER = 3;
+        const CLIENT_ORGANIZATION = 4;
+    }
+
        
     class User{
         
@@ -608,6 +616,46 @@
         $clause = Util::escapeObject($clause);
         
         $s = "SELECT * FROM  `Users_temp`";
+        if (!($stmt = $sql_conn->prepare($s))){
+            echo "Prepare failed: (" . $sql_conn->errno . ") " . $sql_conn->error. $s;
+        }
+                  
+        if (!($stmt->execute())) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        
+        if (!($ret = $stmt->get_result())) {
+            echo "Getting Result failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        
+        
+        $user = new User();
+        $res = array();
+        while($row = mysqli_fetch_array($ret)) {
+            $user = new User();
+            $user->populateFromDBRow($row);
+            if($public){
+                $user = getPublicUserData($user);
+            }
+            $res[] = $user;
+        }
+        
+        $stmt->close();
+
+        mysqli_close($sql_conn);
+        $r = json_encode($res);
+        //echo "hello : ". $r;
+        return $r;
+    }
+
+    // get all reviewers
+    // for now we consider if user is admin then he/she is the reviewer
+    // we might change this in future with new user type as reviewer
+    function getReviewers($public = true){
+        $sql_conn = mysqli_connection();
+        $clause = Util::escapeObject($clause);
+        
+        $s = "SELECT * FROM  `Users_temp` WHERE authtype_id = ".TypeOfUser::ADMIN;
         if (!($stmt = $sql_conn->prepare($s))){
             echo "Prepare failed: (" . $sql_conn->errno . ") " . $sql_conn->error. $s;
         }

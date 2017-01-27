@@ -73,6 +73,12 @@
             }
 
             $sql = "SELECT * FROM  UD_P_Info INNER JOIN UD_P_Projects ON (`UD_P_Info`.`_id` = `UD_P_Projects`.`project_id`) ".$where." ORDER BY `UD_P_Info`.`sl_pr_no`";
+            // my change to remove where clause to list all the project for admin
+
+            // if user is admin show him all the projects
+            if($_SESSION['user']->authtype_id == 1) {
+                $sql = "SELECT * FROM  UD_P_Info INNER JOIN UD_P_Projects ON (`UD_P_Info`.`_id` = `UD_P_Projects`.`project_id`) ORDER BY `UD_P_Info`.`sl_pr_no`";
+            }  
             $udProjectInfo = array();
             $res = array();
             try{
