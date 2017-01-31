@@ -100,14 +100,10 @@
                                                             </div>
                                                             <div class="cl-div-project-award-progress-container" id="id-div-project-award-progress-container"></div>                                                                    
                                                         </div>
-                                                        <div class="cl-div-project-buttons">
+                                                        <div class="cl-div-project-review-button">
                                                             <div class="cl-div-project-button-img-holder">
-                                                                <img src="images/solutions_inactive.png" class="cl-project-edit-btn"></img>
-                                                                <span>Edit</span>
-                                                            </div>
-                                                            <div class="cl-div-project-button-img-holder">
-                                                                <img src="images/upload_inactive.png" class="cl-project-submit-btn"></img>
-                                                                <span>Submit</span>
+                                                                <img src="images/Review_Button.png" class="cl-project-review-btn"></img>
+                                                                <span>Review</span>
                                                             </div>
                                                         </div>
                                                     </div>

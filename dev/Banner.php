@@ -67,35 +67,35 @@
                                 </ul>
                                 <?php
                                     $s = substr(ucfirst($includerFile),0,strpos($includerFile,"."));
-                                    if($s === "Solutions_l"){
+                                    if($s === "Solutions_l" || $s === "AdminSolution"){
                                         echo('<div class="cl-div-nav-image-holder">
-                                    <a href="projectDashboard.php"><img id="id-img-navbar-p-manage" src="images/manage_inactive.png"/></a>
-                                    <a href="#"><img id="id-img-navbar-p-solutions" src="images/solutions_inactive.png"/></a>
-                                    <a href="#"><img id="id-img-navbar-p-upload" src="images/upload_inactive.png"/></a>
-                                </div>
-                                <div class="cl-div-nav-project-award-details-holder">
-                                    <div class="cl-div-project-award-credit-details">
-                                        <div class="cl-div-project-award-credit-title-holder">
-                                            <span class="cl-span-project-award-credit-title">Total Credits</span>
+                                        <a href="projectDashboard.php"><img id="id-img-navbar-p-manage" src="images/manage_inactive.png"/></a>
+                                        <a href="#"><img id="id-img-navbar-p-solutions" src="images/solutions_inactive.png"/></a>
+                                        <a href="#"><img id="id-img-navbar-p-upload" src="images/upload_inactive.png"/></a>
                                         </div>
-                                        <div class="cl-div-project-award-credit-value-holder">
-                                            <div class="cl-div-project-award-credit-item-holder" id="id-div-project-award-credit-earned">
-                                                <span class="cl-span-project-award-credit-item-title">Earned</span>
-                                                <span class="cl-span-project-award-credit-item-value">0</span>
+                                        <div class="cl-div-nav-project-award-details-holder">
+                                            <div class="cl-div-project-award-credit-details">
+                                                <div class="cl-div-project-award-credit-title-holder">
+                                                    <span class="cl-span-project-award-credit-title">Total Credits</span>
+                                                </div>
+                                                <div class="cl-div-project-award-credit-value-holder">
+                                                    <div class="cl-div-project-award-credit-item-holder" id="id-div-project-award-credit-earned">
+                                                        <span class="cl-span-project-award-credit-item-title">Earned</span>
+                                                        <span class="cl-span-project-award-credit-item-value">0</span>
+                                                    </div>
+                                                    <div class="cl-div-project-award-credit-item-holder" id="id-div-project-award-credit-available">
+                                                        <span class="cl-span-project-award-credit-item-title">Available</span>
+                                                        <span class="cl-span-project-award-credit-item-value">100</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="cl-div-project-award-credit-item-holder" id="id-div-project-award-credit-available">
-                                                <span class="cl-span-project-award-credit-item-title">Available</span>
-                                                <span class="cl-span-project-award-credit-item-value">100</span>
+                                            <div class="cl-div-project-award">
+                                                <div class="cl-div-project-award-title-holder">
+                                                    <span class="cl-span-project-award-credit-title"></span>
+                                                </div>
+                                                <div class="cl-div-project-award-progress-container" id="id-div-project-award-progress-container"></div>                                                                    
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="cl-div-project-award">
-                                        <div class="cl-div-project-award-title-holder">
-                                            <span class="cl-span-project-award-credit-title"></span>
-                                        </div>
-                                        <div class="cl-div-project-award-progress-container" id="id-div-project-award-progress-container"></div>                                                                    
-                                    </div>
-                                </div>');
+                                        </div>');
                                     }
                                 ?>
                             </div>

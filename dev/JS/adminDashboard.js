@@ -26,12 +26,13 @@ $(document).ready(function () {
             var projectEditIcon = $(projectTemplete).find(".cl-i-project-edit");
             var projectLeftContainer = $(projectTemplete).find(".cl-div-project-info-left");
             var projectRightContainer = $(projectTemplete).find(".cl-div-project-info-right");
-            var projectEditButton = $(projectTemplete).find(".cl-project-edit-btn");
+            var projectEditButton = $(projectTemplete).find(".cl-project-review-btn");
 
-
+            // when admin clicks on review button open admin solution review page.
+            // to do : do solution  page for admin
             $(projectEditButton).attr("data-project-id",elem._id);
             $(projectEditButton).click(function(ev){
-                var target = "solutions_l.php?edit=true&id=" + $(this).attr("data-project-id");
+                var target = "adminSolution.php?edit=true&id=" + $(this).attr("data-project-id");
                 window.location.href = target;
             });
 

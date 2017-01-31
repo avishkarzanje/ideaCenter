@@ -2875,3 +2875,13 @@ div#id-div-submit-project-upper-container {
     width: 100%;
     margin-bottom: 3px;
 }
+
+.cl-div-project-review-button {
+    display: flex;
+    width: 70px;
+    align-items: center;
+    margin-left: 5px;
+    background-color: #E8E8E8;
+    font-size: 0.8em;
+    font-weight: 600;
+}
